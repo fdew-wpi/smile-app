@@ -21,7 +21,7 @@ def index():
 def like(post_id):
     post = db.session.get(Post, post_id)
     if post:
-        post.likes += 1
+        post.like_count += 1
         db.session.commit()
     return redirect(url_for('main.index'))
 
