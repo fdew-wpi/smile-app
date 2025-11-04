@@ -25,8 +25,8 @@ def like(post_id):
         db.session.commit()
     return redirect(url_for('main.index'))
 
-@bp_main.route('/create', methods=['GET', 'POST'])
-def create():
+@bp_main.route('/post', methods=['GET', 'POST'])
+def postsmile():
     form = PostForm()
     if form.validate_on_submit():
         post = Post(title=form.title.data, body=form.body.data, happiness_level=form.happiness_level.data)
