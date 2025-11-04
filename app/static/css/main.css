@@ -66,3 +66,12 @@ a:hover {
     background-image: url("..//img//like_hover.png");
     cursor:pointer;
 }
+
+.flash-message {
+    background-color: #f2dede;
+    color: #a94442;
+    padding: 10px;
+    margin-bottom: 10px;
+    border: 1px solid #ebccd1;
+    border-radius: 4px;
+}

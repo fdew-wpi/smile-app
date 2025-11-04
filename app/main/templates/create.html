@@ -1,28 +1,30 @@
 {% extends "base.html" %}
 
 {% block content %}
-
-    <h1>Post New Smile</h1>
-
-    {% if form %}
-        <form action="" method="post">
-            {{ form.hidden_tag() }}
-            <!--Displays the form item for the post's `title`.--> 
+    <h1>{{ title }}</h1>
+    <form action="" method="post">
+        {{ form.hidden_tag() }}
+        <p>
             {{ form.title.label }}<br>
-            {{ form.title(class="formtitle") }}<br>
-            <!-- TODO: (milestone 1) Display the error messages of the `title` field validator (if there are any validation errors).   -->  
-
-            <!-- TODO: (milestone1) Include the form item for the post's `body`. Apply appropriate styling for the `body`form  item.  -->  
-
-            <!-- TODO: (milestone 1) Display the error messages of the `body` field validator (if there are any validation errors).   -->  
-
-            <!-- TODO: (milestone1) Include the form item for `happiness_level` selection. Apply appropriate styling for the `happiness_level` form item.  -->  
-
-            <!-- TODO: (milestone2) Include the form item for `tag` selection.   -->  
-
-            {{ form.submit(class="button") }}
-        </form>
-    {% endif %}
-
-
-  {% endblock %}
+            {{ form.title(size=32) }}
+            {% for error in form.title.errors %}
+            <span style="color: red;">[{{ error }}]</span>
+            {% endfor %}
+        </p>
+        <p>
+            {{ form.body.label }}<br>
+            {{ form.body(cols=50, rows=4) }}
+            {% for error in form.body.errors %}
+            <span style="color: red;">[{{ error }}]</span>
+            {% endfor %}
+        </p>
+        <p>
+            {{ form.happiness_level.label }}<br>
+            {{ form.happiness_level() }}
+            {% for error in form.happiness_level.errors %}
+            <span style="color: red;">[{{ error }}]</span>
+            {% endfor %}
+        </p>
+        <p>{{ form.submit() }}</p>
+    </form>
+{% endblock %}

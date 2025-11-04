@@ -6,24 +6,21 @@
         </tr>
         <tr>
             <td width="10%" >
-                <!--  (milestone1) TODO: include happiness-level image according to the `cost`s happiness_level .
-                For example :  <img src="{{ url_for('static', filename = 'img//happiness-level-1.png' )}}"  /> "-->   
+                <img src="{{ url_for('static', filename = 'img//happiness-level-' + post.happiness_level|string + '.png' )}}" width="40px" />
             </td>
             <td width="80%" >
-                <!--  TODO: include post body in the following div element and style it. -->    
-                <div>  </div> <br> 
+                <div> {{ post.body }} </div> <br> 
                 <!-- (milestone3) TODO: format the timestamp; display as local date/time-->
                 Posted at: {{ post.timestamp }} 
             </td> 
             <td width = "5%">
                 <div>
-                    <!-- (milestone1)  TODO: add "like" button
-                        Define an HTML `post` form with a submit button. The form action should redirect to `routes.like` route.
-                        Style the submit button using `likebtn` CCS class selector. -->
-                    <div>  </div>       
+                    <form action="{{ url_for('main.like', post_id=post.id) }}" method="post">
+                        {{ like_form.hidden_tag() }}
+                        {{ like_form.submit(class_='likebtn') }}
+                    </form>      
                     <br>
-                    <!-- (milestone1) TODO: include the likes count in the following div element. -->
-                    <div>  </div>
+                    <div> {{ post.like_count }} </div>
                 </div> <br> 
                  <!-- (milestone3) TODO: if the post is posted by the logged-in user, include the "delete" button.  
                                    Define an HTML `post` form with a submit button. The form action should redirect to `routes.deletepost` route.
