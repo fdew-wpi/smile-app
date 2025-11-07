@@ -6,8 +6,11 @@
     <!-- TODO: (milestone1) Display smile count.   -->
     <h3>Number of smiles: {{ smile_count }} </h3>
 
-    <!-- TODO: (milestone 2) Add the template to render an instance of a `sortForm`. The form should display the sort attribute select box and the "Refresh" submit button.
-            Style the `sortorder` form element using the `formselect` CSS element we defined in milestone1 -->
+        <form method="POST">
+        {{ sort_form.hidden_tag() }}
+        {{ sort_form.sort_by(class="formselect") }}
+        {{ sort_form.submit() }}
+    </form>
 
     <!-- TODO: (milestone1) Format posts -->
     <div class="postlist">
