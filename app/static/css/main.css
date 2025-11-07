@@ -75,3 +75,12 @@ a:hover {
     border: 1px solid #ebccd1;
     border-radius: 4px;
 }
+
+.tagitem {
+    text-align: center;
+    padding: 3px;
+    margin: 4px 3px 4px 3px;
+    background-color: #f2dede;
+    border: 1px solid #ebccd1;
+    border-radius: 4px;
+}
