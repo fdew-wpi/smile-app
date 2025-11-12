@@ -1,51 +1,40 @@
-<!-- We add an id for the table to update the HTML content of the table through JavaScript.  -->
-<table id="post-{{post.id}}" class = "posttable" style = "width:100%" valign="top">
-        <tr> 
-            <td colspan="3"><div class="posttitle"> {{post.title}} </div>
-            </td>
-        </tr>
-        <tr>
-            <td width="10%" >
-                <img src="{{ url_for('static', filename = 'img//happiness-level-' + post.happiness_level|string + '.png' )}}" width="40px" />
-            </td>
-            <td width="80%" >
-                <div> {{ post.body }} </div> <br> 
-                <!-- (milestone3) TODO: format the timestamp; display as local date/time-->
-                Posted at: {{ post.timestamp }} 
-            </td> 
-            <td width = "5%">
-                <div>
-                    <form action="{{ url_for('main.like', post_id=post.id) }}" method="post">
-                        {{ like_form.hidden_tag() }}
-                        {{ like_form.submit(class_='likebtn') }}
-                    </form>      
-                    <br>
-                    <div> {{ post.like_count }} </div>
-                </div> <br> 
-                 <!-- (milestone3) TODO: if the post is posted by the logged-in user, include the "delete" button.  
-                                   Define an HTML `post` form with a submit button. The form action should redirect to `routes.deletepost` route.
-                                   Style the submit button using `button` CCS class selector. -->
-            </td>
-        </tr>
-        <tr> 
-            <td colspan="3" style = "text-align:center" valign="bottom">  
-                <br>
-                                {% for tag in post.get_tags() %}
-                <span class="tagitem">{{ tag.name }}</span>
-                {% endfor %}
-            </td>
-        </tr>
-        <tr>
-            <td colspan="3" style = "text-align:center" valign="bottom">  
-                <br>
-                  <!-- (milestone3) TODO: include username who posted the post-->
-            </td>
-        </tr>
-    </table>
+<div id="post-{{post.id}}">
+    <h5 class="card-title">{{ post.title }}</h5>
+    <p class="card-text">{{ post.body }}</p>
+    <p class="card-text"><small class="text-muted">Posted at: {{ moment(post.timestamp).format('LLL') }} by <span class="useritem">{{ post.writer.username }}</span></small></p>
+    <div>
+        {% for tag in post.get_tags() %}
+        <span class="badge bg-secondary">{{ tag.name }}</span>
+        {% endfor %}
+    </div>
+    <div class="d-flex justify-content-between align-items-center mt-3">
+        <div>
+            <button class="likebtn" onclick="like_post({{ post.id }})"></button>
+            <span class="likecount">{{ post.like_count }}</span>
+        </div>
+        {% if post.writer == current_user %}
+        <form action="{{ url_for('main.delete', post_id=post.id) }}" method="post">
+            <input type="submit" value="Delete" class="btn btn-danger btn-sm">
+        </form>
+        {% endif %}
+    </div>
+</div>
 
-<!-- (milestone3)  TODO: refactor the "like" use case. Add the JavaScript code below. -->
 {% block script %}
 <script>
+    async function like_post(post_id) {
+        let url = "{{ url_for('main.like', post_id=0) }}".replace('0', post_id);
+        let response = await fetch(url, {method: 'POST'});
+        let data = await response.json();
+        update_likes(data);
+    }
 
+    function update_likes(data) {
+        let post_id = data.post_id;
+        let like_count = data.like_count;
+        let post_div = document.getElementById('post-' + post_id);
+        let like_count_span = post_div.querySelector('.likecount');
+        like_count_span.textContent = like_count;
+    }
 </script>    
 {% endblock %}

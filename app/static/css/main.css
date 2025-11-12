@@ -84,3 +84,10 @@ a:hover {
     border: 1px solid #ebccd1;
     border-radius: 4px;
 }
+
+.forminput {
+    width: 50%;
+    margin: 5px;
+    padding: 5px;
+    font-family: Tahoma;
+}

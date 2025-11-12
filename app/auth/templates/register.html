@@ -1,8 +1,14 @@
 {% extends "base.html" %}
+{% import "bootstrap_wtf.html" as wtf %}
 
 {% block content %}
     <h1>Register</h1>
-
-    <!-- TODO: (milestone 3) Include the template for "user registration" form here..  -->
-
+    <form action="" method="post">
+        {{ form.hidden_tag() }}
+        {{ wtf.render_field(form.username) }}
+        {{ wtf.render_field(form.email) }}
+        {{ wtf.render_field(form.password) }}
+        {{ wtf.render_field(form.password2) }}
+        <p>{{ form.submit(class="btn btn-primary") }}</p>
+    </form>
 {% endblock %}

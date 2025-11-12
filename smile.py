@@ -2,7 +2,7 @@
 from config import Config
 
 from app import create_app, db
-from app.main.models import Post, Tag
+from app.main.models import Post, Tag, User
 import sqlalchemy as sqla
 import sqlalchemy.orm as sqlo
 from sqlalchemy import event
@@ -11,7 +11,7 @@ app = create_app(Config)
 
 @app.shell_context_processor
 def make_shell_context():
-    return {'sqla': sqla, 'sqlo': sqlo, 'db': db, 'Post': Post, 'Tag': Tag }
+    return {'sqla': sqla, 'sqlo': sqlo, 'db': db, 'Post': Post, 'Tag': Tag, 'User': User }
 
 tags = ['funny','inspiring', 'true-story', 'heartwarming', 'friendship']
 

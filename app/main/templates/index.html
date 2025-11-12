@@ -1,24 +1,35 @@
 {% extends "base.html" %}
 
 {% block content %}
-
     <h1>Welcome to Smile Portal!</h1>
-    <!-- TODO: (milestone1) Display smile count.   -->
     <h3>Number of smiles: {{ smile_count }} </h3>
 
-        <form method="POST">
+    <form method="POST" class="row g-3 align-items-center">
         {{ sort_form.hidden_tag() }}
-        {{ sort_form.sort_by(class="formselect") }}
-        {{ sort_form.submit() }}
+        <div class="col-auto">
+            {{ sort_form.sort_by.label(class="form-label") }}
+            {{ sort_form.sort_by(class="form-select") }}
+        </div>
+        <div class="col-auto">
+            <div class="form-check">
+                {{ sort_form.my_posts(class="form-check-input") }}
+                {{ sort_form.my_posts.label(class="form-check-label") }}
+            </div>
+        </div>
+        <div class="col-auto">
+            {{ sort_form.submit(class="btn btn-primary") }}
+        </div>
     </form>
 
-    <!-- TODO: (milestone1) Format posts -->
-    <div class="postlist">
+    <div class="row">
     {% for post in posts %}
-        <div class="post-box">
-            {% include '_post.html' %} 
+        <div class="col-md-4">
+            <div class="card mb-4">
+                <div class="card-body">
+                    {% include '_post.html' %}
+                </div>
+            </div>
         </div>
     {% endfor %}
     </div>
-  
 {% endblock %}
