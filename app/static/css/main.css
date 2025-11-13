@@ -17,7 +17,7 @@ body {
     width: 55px;
     border: 0px;
     vertical-align: middle;
-    background-image: url("..//img//like.png");
+    background-image: url("../img/like.png");
     background-repeat: no-repeat;
     background-size: contain;
     -webkit-background-size: contain;
@@ -25,6 +25,6 @@ body {
     -o-background-size: contain;
 } 
 .likebtn:hover {
-    background-image: url("..//img//like_hover.png");
+    background-image: url("../img/like_hover.png");
     cursor:pointer;
 }

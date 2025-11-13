@@ -1,4 +1,5 @@
 <div id="post-{{post.id}}">
+    <img src="{{ url_for('static', filename='img/happiness-level-' + post.happiness_level|string + '.png') }}" width="40px" />
     <h5 class="card-title">{{ post.title }}</h5>
     <p class="card-text">{{ post.body }}</p>
     <p class="card-text"><small class="text-muted">Posted at: {{ moment(post.timestamp).format('LLL') }} by <span class="useritem">{{ post.writer.username }}</span></small></p>
