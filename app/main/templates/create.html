@@ -1,14 +1,37 @@
 {% extends "base.html" %}
-{% import "bootstrap_wtf.html" as wtf %}
 
 {% block content %}
     <h1>{{ title }}</h1>
     <form action="" method="post">
         {{ form.hidden_tag() }}
-        {{ wtf.render_field(form.title) }}
-        {{ wtf.render_field(form.body) }}
-        {{ wtf.render_field(form.happiness_level) }}
-        {{ wtf.render_field(form.tag) }}
+        <div class="mb-3">
+            {{ form.title.label(class="form-label") }}
+            {{ form.title(class="form-control") }}
+            {% for error in form.title.errors %}
+                <span class="text-danger">{{ error }}</span>
+            {% endfor %}
+        </div>
+        <div class="mb-3">
+            {{ form.body.label(class="form-label") }}
+            {{ form.body(class="form-control", rows=5) }}
+            {% for error in form.body.errors %}
+                <span class="text-danger">{{ error }}</span>
+            {% endfor %}
+        </div>
+        <div class="mb-3">
+            {{ form.happiness_level.label(class="form-label") }}
+            {{ form.happiness_level(class="form-select") }}
+            {% for error in form.happiness_level.errors %}
+                <span class="text-danger">{{ error }}</span>
+            {% endfor %}
+        </div>
+        <div class="mb-3">
+            {{ form.tag.label(class="form-label") }}
+            {{ form.tag(class="form-select", multiple=True) }}
+            {% for error in form.tag.errors %}
+                <span class="text-danger">{{ error }}</span>
+            {% endfor %}
+        </div>
         <p>{{ form.submit(class="btn btn-primary") }}</p>
     </form>
 {% endblock %}
