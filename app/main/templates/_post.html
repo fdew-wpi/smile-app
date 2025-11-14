@@ -5,11 +5,11 @@
     <p class="card-text"><small class="text-muted">Posted at: {{ moment(post.timestamp).format('LLL') }} by <span class="useritem">{{ post.writer.username }}</span></small></p>
     <div>
         {% for tag in post.get_tags() %}
-        <span class="badge bg-secondary">{{ tag.name }}</span>
+        <span class="tag">{{ tag.name }}</span>
         {% endfor %}
     </div>
     <div class="d-flex justify-content-between align-items-center mt-3">
-        <div>
+        <div class="like-container">
             <button class="likebtn" onclick="like_post({{ post.id }})"></button>
             <span class="likecount">{{ post.like_count }}</span>
         </div>

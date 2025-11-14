@@ -1,0 +1,35 @@
+{% macro form_field(field, form_type="basic", horizontal_columns=('lg', 2, 10)) -%}
+  {% if form_type == "horizontal" %}
+    <div class="row mb-3">
+      <label for="{{ field.id }}" class="col-{{ horizontal_columns[0] }}-{{ horizontal_columns[1] }} col-form-label">{{ field.label }}</label>
+      <div class="col-{{ horizontal_columns[0] }}-{{ horizontal_columns[2] }}">
+        {{ field(class="form-control") }}
+        {% if field.errors %}
+          <div class="invalid-feedback">
+            {{ field.errors|join(' ') }}
+          </div>
+        {% endif %}
+        {% if field.description %}
+          <div class="form-text">
+            {{ field.description }}
+          </div>
+        {% endif %}
+      </div>
+    </div>
+  {% else %}
+    <div class="mb-3">
+      {{ field.label(class="form-label") }}
+      {{ field(class="form-control") }}
+        {% if field.errors %}
+          <div class="invalid-feedback d-block">
+              {{ field.errors|join(' ') }}
+          </div>
+        {% endif %}
+        {% if field.description %}
+          <div class="form-text">
+            {{ field.description }}
+          </div>
+        {% endif %}
+    </div>
+  {% endif %}
+{% endmacro %}
